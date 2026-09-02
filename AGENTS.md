@@ -1,68 +1,53 @@
 # AGENTS.md — how to use Onboarding-Packs
 
-You are a coding agent. This repo is the CortexDB onboarding pack. **Read the human README first** for audience routing, then execute exactly one path below. Do not invent CortexDB API signatures. Do not print tokens. Do not mint a new tenant over a working shared brain.
+You are a coding agent. Read the human README for routing, then execute exactly one path. Do not invent API signatures. Do not print tokens. Do not mint a new tenant over a working shared brain.
 
-`PACK_ROOT` = this repository root (the folder that contains this file).
-
----
-
-## Path 1 — Human playground (support only)
-
-If the user is learning themselves, **do not take over**. Point them to:
-
-- `$PACK_ROOT/01-self-host/CORTEXDB_SETUP_GUIDE.md`
-- `$PACK_ROOT/01-self-host/cortex.example.env`
-
-Help only when asked (Docker errors, health checks). Prefer them completing §1–§6 of the setup guide by hand.
+`PACK_ROOT` = this repository root.
 
 ---
 
-## Path 2 — New app (“Build my app with CortexDB”)
+## Path 1 — Cloud / free trial (default brain)
 
-Trigger phrases: *build my app with CortexDB*, *greenfield*, *new project with memory*.
+Trigger: *free trial*, *cloud keys*, *hosted*, *api-v1*, *get me a brain*, *try CortexDB*.
 
-1. Confirm `PROJECT_DIR` (where the new app will live or already was scaffolded).
-2. Execute `$PACK_ROOT/02-app-in-repo/APP-ONBOARDING.md` end to end.
-3. Dual-write: CortexDB **alongside** any primary DB you create; never CortexDB-only unless the user said so.
-4. Copy `AGENTS.md`, `.cortexdb/CONVENTIONS.md`, and `docs/` into the app as that file instructs.
-5. Prefer shared brain if the user already has `CORTEXDB_*` credentials; otherwise create a new tenant only with explicit OK.
-6. After wiring, offer Path 4 if they want Claude/Cursor/Grok on the same brain.
-
-Standing rule once live: **recall → act → write**. Look up calls in `CortexDB_docs/00_INDEX.md` (or docs MCP); never from training memory.
+1. Execute `$PACK_ROOT/00-cloud-trial/CLOUD-TRIAL.md`.
+2. Prefer existing `.env` (mode B). Only signup (mode A) if no working credentials.
+3. Confirm whoami + smoke write/answer. Report actor/scope/expiry only — never the bearer.
+4. If they also asked to build an app, continue to Path 3/4 with `SHARE_BRAIN=true` and `CORTEX_ENV_FILE=$PACK_ROOT/00-cloud-trial/.env`.
 
 ---
 
-## Path 3 — Existing repo (“Implement CortexDB on my current repo”)
+## Path 2 — Docker self-host
 
-Trigger phrases: *implement CortexDB on my current repo*, *cortexdbify*, *add memory to this codebase*.
-
-1. Set `PROJECT_DIR` = the user’s existing app root (required).
-2. Execute `$PACK_ROOT/02-app-in-repo/APP-ONBOARDING.md` end to end.
-3. **Do not** replace Postgres/Supabase/etc. Dual-write only.
-4. Merge into existing `AGENTS.md` if present; do not wipe project rules.
-5. Prefer `SHARE_BRAIN=true` when a working `.env` exists.
-6. Smoke: whoami + one write + one recall; report success without printing secrets.
-
-Same standing rule: recall → act → write; look up APIs.
+`$PACK_ROOT/01-self-host/CORTEXDB_SETUP_GUIDE.md`. Only when they asked for local Docker.
 
 ---
 
-## Path 4 — Personal / shared brain (harness attach)
+## Path 3 — New app (“Build my app with CortexDB”)
 
-Trigger phrases: *hook Claude/Cursor/Grok to my brain*, *attach harness*, *Personal Brain*.
-
-1. Confirm a working tenant (`CORTEXDB_URL`, `CORTEXDB_API_KEY`, actor, scope).
-2. Open `$PACK_ROOT/03-harness-attach/README.md` and run the matching harness pack:
-   - Claude Code → `ClaudeCode/CLAUDE-CODE-ONBOARDING.md`  
-     User-global MCP is **`~/.claude.json` → `mcpServers`** (not `~/.claude/mcp.json`).
-   - Cursor → `Cursor/CURSOR-ONBOARDING.md`
-   - Grok Bot → `Grokbot/GROKBOT-ONBOARDING.md`
-3. Verify with a health/whoami style check and a tiny recall/write. Never print the key.
-4. Unified Brain product UX is **out of scope** here — see https://github.com/vipul-khatana/Unified-Brain-MVP
+1. Prefer Path 1 brain first (`00-cloud-trial/.env`).
+2. Execute `$PACK_ROOT/02-app-in-repo/APP-ONBOARDING.md` with `SHARE_BRAIN=true` when `.env` exists.
+3. Dual-write alongside any primary DB. Never invent `/v1/remember`.
+4. Standing rule: recall → act → write.
 
 ---
 
-## Honesty + security (all paths)
+## Path 4 — Existing repo (“Implement CortexDB on my current repo”)
 
-- Integrations count: **47**. No 93.8% LongMemEval. No ~742ms latency claim. Raft = experimental. Not “always-on” by magic.
+1. `PROJECT_DIR` = their app root (required).
+2. `SHARE_BRAIN=true` + `CORTEX_ENV_FILE` when cloud/self-host `.env` exists.
+3. Execute `APP-ONBOARDING.md`. Merge AGENTS.md; do not wipe project rules.
+4. Smoke whoami + write + recall. No secrets in output.
+
+---
+
+## Path 5 — Harness attach
+
+`$PACK_ROOT/03-harness-attach/` — Claude Code uses **`~/.claude.json` → `mcpServers`**, not `~/.claude/mcp.json`.
+
+---
+
+## Honesty + security
+
+- Integrations **47**. No 93.8% LongMemEval. No ~742ms claim. Raft experimental.
 - Never commit filled env files. Never paste API keys into chat, commits, or issue bodies.

@@ -1,6 +1,6 @@
 # CortexDB Onboarding Packs
 
-Official onboarding docs for CortexDB. **One repo, four audiences.** Send this whole repo (or a folder deep-link). Do not fork into three repos — that goes stale.
+Official onboarding docs for CortexDB. **One repo, clear paths.** Send this whole repo (or a folder deep-link). Do not fork into three repos — that goes stale.
 
 ---
 
@@ -8,80 +8,68 @@ Official onboarding docs for CortexDB. **One repo, four audiences.** Send this w
 
 | Priority | Who you are | What to say / do | Open |
 |---|---|---|---|
-| **1 — top** | **Human** learning CortexDB (coder in the playground) | Read and run the self-host trial yourself | [`01-self-host/`](01-self-host/) → start at `CORTEXDB_SETUP_GUIDE.md` |
-| **2** | **Agentic developer** building a **new** app | Tell your agent: *“Build my app with CortexDB”* and point it at this pack | [`02-app-in-repo/APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md) (new app / no existing DB required to dual-write later) |
-| **3** | **Agentic development** on an **existing** repo | Give the agent this folder and say: *“Implement CortexDB on my current repo”* | Same [`APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md) with `PROJECT_DIR` = your repo |
-| **4** | Hook tools to a **personal / shared brain** | Attach Claude Code, Cursor, or Grok Bot to a working tenant | [`03-harness-attach/`](03-harness-attach/) |
+| **1 — top** | **Human** on **cloud / free trial** (or you already have hosted keys) | Get keys → smoke write/recall yourself → then build an app with the same `.env` | [`00-cloud-trial/`](00-cloud-trial/) → `CLOUD-TRIAL.md` |
+| **2** | **Human** who wants **Docker self-host** | Local container trial | [`01-self-host/`](01-self-host/) → `CORTEXDB_SETUP_GUIDE.md` |
+| **3** | **Agentic developer** building a **new** app | *“Build my app with CortexDB”* (prefer shared cloud `.env` from path 1) | [`02-app-in-repo/APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md) |
+| **4** | **Agentic development** on an **existing** repo | *“Implement CortexDB on my current repo”* | Same `APP-ONBOARDING.md` + `PROJECT_DIR` |
+| **5** | Hook tools to a **personal / shared brain** | Attach Claude Code, Cursor, or Grok Bot | [`03-harness-attach/`](03-harness-attach/) |
 
-Agents: also read [`AGENTS.md`](AGENTS.md) (how to execute each path).
+Agents: also read [`AGENTS.md`](AGENTS.md).
 
----
-
-## 1. Human — playground first
-
-If you are a person who wants to **understand and implement** CortexDB (not hand everything to an agent):
-
-1. Open **[`01-self-host/`](01-self-host/)**.
-2. Follow **`CORTEXDB_SETUP_GUIDE.md`** top to bottom (Docker + Ollama embeddings + health check + a test write/recall).
-3. Keep `cortex.example.env` next to the guide; copy it to `cortex.env` (gitignored) and fill keys locally.
-4. Optional next: skim [`02-app-in-repo/docs/00_INDEX.md`](02-app-in-repo/docs/00_INDEX.md) to learn scopes, recall, and ingestion without wiring an app yet.
-
-This path is the **default** for anyone we email a “start here” link.
+**Typical “try CortexDB then build” flow:** path **1** then path **3** (same keys). Skip Docker unless they ask.
 
 ---
 
-## 2. Agentic developer — new app
+## 1. Cloud / free trial (default playground)
 
-You are building something new and want CortexDB in from day one.
+Hosted at `https://api-v1.cortexdb.ai`.
 
-**Human prompt to your coding agent:**
+1. Open **[`00-cloud-trial/`](00-cloud-trial/)**.
+2. Follow **`CLOUD-TRIAL.md`**: anonymous signup (7-day free tier) **or** paste existing cloud keys.
+3. Run whoami + smoke write/answer yourself.
+4. Keep `.env` gitignored. Then jump to [`02-app-in-repo/`](02-app-in-repo/) with `SHARE_BRAIN=true`.
 
-> Build my app with CortexDB. Use the onboarding pack at `02-app-in-repo/`. Follow `APP-ONBOARDING.md`. Dual-write memory; do not invent API paths. Do not print tokens.
-
-**If you are the agent:** open [`AGENTS.md`](AGENTS.md) § Path 2, then execute [`02-app-in-repo/APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md).
-
----
-
-## 3. Agentic development — cortexdbify an existing repo
-
-You already have an app. You want CortexDB alongside the current database.
-
-**Human prompt to your coding agent:**
-
-> Implement CortexDB on my current repo. Pack = `02-app-in-repo/`. `PROJECT_DIR` = this repository. Follow `APP-ONBOARDING.md` end to end. Prefer a shared brain if I already have a working `.env`. Do not replace Postgres/Supabase. Do not mint a new tenant over a working token.
-
-**If you are the agent:** open [`AGENTS.md`](AGENTS.md) § Path 3, then execute the same `APP-ONBOARDING.md` with `PROJECT_DIR` set.
+Docs cold-start: https://cortexdb.ai/docs/sdks/rest-api
 
 ---
 
-## 4. Personal / shared brain — hook harnesses
+## 2. Self-host (Docker) — optional
 
-You already have (or will have) a CortexDB tenant and want Claude Code / Cursor / Grok Bot to recall and write to it.
+Only if you want a container on your machine.
 
-Open [`03-harness-attach/`](03-harness-attach/):
-
-| Harness | Start |
-|---|---|
-| Claude Code | `ClaudeCode/CLAUDE-CODE-ONBOARDING.md` (user MCP lives in `~/.claude.json` → `mcpServers`) |
-| Cursor | `Cursor/CURSOR-ONBOARDING.md` |
-| Grok Bot | `Grokbot/GROKBOT-ONBOARDING.md` |
-
-Product-shaped “Unified Brain” (one-click personal brain) is a **separate** repo: [Unified-Brain-MVP](https://github.com/vipul-khatana/Unified-Brain-MVP). Do not copy it into this pack.
+Open [`01-self-host/`](01-self-host/) → `CORTEXDB_SETUP_GUIDE.md`.
 
 ---
 
-## Folder map (stable paths)
+## 3–4. Build or cortexdbify an app
+
+[`02-app-in-repo/APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md)
+
+> Build my app with CortexDB. Use `02-app-in-repo/`. Prefer `00-cloud-trial/.env` as the shared brain.
+
+> Implement CortexDB on my current repo. Pack = `02-app-in-repo/`. `PROJECT_DIR` = this repository. `SHARE_BRAIN=true` if I already have cloud keys.
+
+---
+
+## 5. Personal / shared brain — harnesses
+
+[`03-harness-attach/`](03-harness-attach/) — Claude Code (`~/.claude.json`), Cursor, Grok Bot.
+
+Unified Brain product (separate): https://github.com/vipul-khatana/Unified-Brain-MVP
+
+---
+
+## Folder map
 
 ```
 Onboarding-Packs/
-  README.md              ← humans start here (this file)
-  AGENTS.md              ← agents start here
-  01-self-host/          ← Path 1 (human playground / local trial)
-  02-app-in-repo/        ← Paths 2 & 3 (new app or existing repo)
-  03-harness-attach/     ← Path 4 (wire IDE/chat to a brain)
+  README.md
+  AGENTS.md
+  00-cloud-trial/     ← hosted free trial / cloud keys (default human start)
+  01-self-host/       ← Docker local trial
+  02-app-in-repo/     ← new app or existing repo (uses keys from 00 or 01)
+  03-harness-attach/  ← wire IDE/chat to a brain
 ```
-
-One GitHub repo is intentional: one source of truth, deep-link the folder that matches the recipient. Splitting into three repos duplicates honesty rules and drifts.
 
 ---
 
@@ -91,7 +79,8 @@ One GitHub repo is intentional: one source of truth, deep-link the folder that m
 - Do **not** cite LongMemEval **93.8%**.
 - Do **not** cite **~742ms** as a latency claim.
 - **Raft** is experimental / not marketed as shipped.
-- CortexDB is **not** “always-on” without setup — say what you actually run.
+- CortexDB is **not** “always-on” without setup.
+- Free-tier anonymous tokens expire (~7 days); re-signup is a new empty tenant.
 
 ## Security
 
