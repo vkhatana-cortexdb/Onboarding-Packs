@@ -1,0 +1,27 @@
+# CortexDB is memory of record (Claude Code)
+
+This machine's Claude Code sessions use **CortexDB** as the central brain via the `cortexdb` MCP. Chat history is not durable memory.
+
+## Every task
+
+1. **Recall first.** Call MCP `get_context` or `memory_search` with the user's task (and a second search for prior harness work if relevant) before planning or editing when the task touches past work, people, decisions, repos, or "what do we know".
+2. **Act** using that context.
+3. **Write back.** After a durable action, call MCP `memory_store` with a short factual summary. Include `harness:claude-code` in the text (and a doc label if the user named one).
+4. **Forget** only if the user asked to delete (`memory_forget` / `memory_delete`).
+
+Empty small talk with no facts does not need a write.
+
+## Docs (never invent API calls)
+
+1. https://cortexdb.ai/llms.txt then https://cortexdb.ai/agent/manifest.json
+2. https://cortexdb.ai/docs
+3. If an offline CortexDB_docs/ or agent onboarding docs pack is on disk, start at its `00_INDEX.md`. Do not read large reference files linearly.
+4. If unsure, stop and say so. Legacy `/v1/remember` 404s.
+
+There is usually no separate `cortexdb_docs_search` MCP. Prefer live docs + MCP memory tools.
+
+## Auth
+
+- Prefer the configured MCP identity. Do **not** run anonymous signup / `cortexdb init` if a working shared `.env` already exists — that mints a **new** brain.
+- Never print or commit tokens.
+- `/v1/answer` may exist on REST without an MCP tool; use `memory_search` / `get_context` for grounding in Claude Code.

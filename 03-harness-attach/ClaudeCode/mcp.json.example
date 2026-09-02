@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "cortexdb": {
+      "type": "stdio",
+      "command": "/opt/homebrew/bin/python3",
+      "args": ["-m", "cortexdb_mcp"],
+      "env": {
+        "CORTEXDB_URL": "https://api-v1.cortexdb.ai",
+        "CORTEXDB_API_KEY": "<from .env - do not commit>",
+        "CORTEXDB_ACTOR": "<from .env>",
+        "CORTEXDB_SCOPE": "<from .env>"
+      }
+    }
+  }
+}

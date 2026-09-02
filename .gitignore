@@ -1,0 +1,17 @@
+# Secrets — never commit live env
+.env
+.env.*
+!.env.example
+!env.example
+!cortex.example.env
+cortex.env
+**/.env
+**/personal-brain-demo/.env
+**/.signup.json
+
+# Python / OS junk
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+*.egg-info/

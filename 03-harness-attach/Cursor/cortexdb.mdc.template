@@ -1,0 +1,29 @@
+---
+description: CortexDB is memory of record for this project and Cursor sessions
+alwaysApply: true
+---
+
+# CortexDB is memory of record (Cursor)
+
+Use the `cortexdb` MCP server. Chat history is not durable memory.
+
+## Every task
+
+1. **Recall first.** Call MCP `get_context` or `memory_search` with the user's task (and a second search for prior harness work if relevant) before planning or editing when the task touches past work, people, decisions, repos, or "what do we know".
+2. **Act** using that context.
+3. **Write back.** After a durable action, call MCP `memory_store` with a short factual summary. Include `harness:cursor` in the text (and a doc label if the user named one).
+4. **Forget** only if the user asked to delete.
+
+Empty small talk with no facts does not need a write.
+
+## Docs (never invent API calls)
+
+1. https://cortexdb.ai/llms.txt then https://cortexdb.ai/agent/manifest.json
+2. https://cortexdb.ai/docs
+3. Offline docs pack if present: start at `00_INDEX.md`. Do not read large reference files linearly.
+4. If unsure, stop and say so. Legacy `/v1/remember` 404s.
+
+## Auth
+
+- Prefer the configured MCP identity. Do not run anonymous signup / `cortexdb init` if a working shared `.env` already exists.
+- Never print or commit tokens.

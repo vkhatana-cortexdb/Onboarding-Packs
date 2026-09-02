@@ -1,0 +1,4 @@
+.env
+.signup.json
+.venv/
+__pycache__/

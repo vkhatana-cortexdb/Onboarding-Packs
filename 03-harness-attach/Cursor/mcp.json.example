@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "cortexdb": {
+      "command": "cortexdb-mcp",
+      "env": {
+        "CORTEXDB_URL": "https://api-v1.cortexdb.ai",
+        "CORTEXDB_API_KEY": "<from .env - do not commit>",
+        "CORTEXDB_ACTOR": "<from .env>",
+        "CORTEXDB_SCOPE": "<from .env>"
+      }
+    }
+  }
+}
