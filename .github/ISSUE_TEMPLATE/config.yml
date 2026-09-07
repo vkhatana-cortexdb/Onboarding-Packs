@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: CortexDB product documentation
+    url: https://cortexdb.ai/docs
+    about: Canonical API reference. Check here before reporting a docs bug.
+  - name: Security vulnerability or leaked credential
+    url: https://github.com/vkhatana-cortexdb/Onboarding-Packs/security/policy
+    about: Do not file a public issue — report privately.

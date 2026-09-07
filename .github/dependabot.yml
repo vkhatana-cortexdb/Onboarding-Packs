@@ -1,0 +1,9 @@
+version: 2
+updates:
+  # Only GitHub Actions — this repo ships docs and dependency-free scripts.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3
+    labels: ["ci"]

@@ -1,0 +1,87 @@
+name: Docs hygiene
+
+# Runs on every PR, including PRs from forks. Deliberately uses no third-party
+# actions and requires no secrets, so a fork PR can never exfiltrate anything.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene:
+    name: No secrets, no local paths, no invented endpoints
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No credential-shaped strings
+        run: |
+          if git grep -nE 'sk-[A-Za-z0-9]{16,}|eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}|BEGIN [A-Z ]*PRIVATE KEY|xox[baprs]-[A-Za-z0-9-]{10,}|gh[pousr]_[A-Za-z0-9]{20,}' -- . ; then
+            echo "::error::Credential-shaped string found. Remove it and rotate the credential."
+            exit 1
+          fi
+          echo "ok: no credential-shaped strings"
+
+      - name: No live env files committed
+        run: |
+          if git ls-files | grep -E '(^|/)(\.env($|\..*)|cortex\.env|\.signup\.json)$' ; then
+            echo "::error::A live env/credential file is tracked. Only *.example files belong in git."
+            exit 1
+          fi
+          echo "ok: no live env files tracked"
+
+      - name: Example env files hold placeholders only
+        run: |
+          fail=0
+          for f in $(git ls-files | grep -E 'env\.example$|\.example\.env$'); do
+            # A non-empty value that is not a <PLACEHOLDER>, not a URL, and not a known
+            # local dummy is treated as a real leaked value.
+            if grep -nE '^[A-Z_]*(API_KEY|TOKEN|SECRET|PASSWORD)=[^<[:space:]#]' "$f" \
+               | grep -vE '=(ollama-local|noauth-local)\b' ; then
+              echo "::error file=$f::Example env file appears to contain a real value."
+              fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "ok: example env files are placeholders"
+          exit $fail
+
+      - name: No local machine paths
+        run: |
+          if git grep -nE '/Users/[A-Za-z0-9._-]+/|/home/[A-Za-z0-9._-]+/|[A-Z]:\\\\Users\\\\' -- . ':!.github/workflows' ; then
+            echo "::error::Local machine path found. Use a repo-relative path or \$PACK_ROOT."
+            exit 1
+          fi
+          echo "ok: no local machine paths"
+
+      # The docs legitimately *warn against* the legacy endpoint and the retracted
+      # claims, so a bare grep would fire on every prohibition. Only lines that
+      # assert them — i.e. carry no negation marker — are treated as failures.
+      - name: No legacy /v1/remember endpoint
+        run: |
+          hits=$(git grep -nE '/v1/remember' -- . ':!.github' ':!CONTRIBUTING.md' \
+                 | grep -viE "never|\bnot\b|no longer|don'?t|avoid|legacy|wrong|404" || true)
+          if [ -n "$hits" ]; then
+            echo "$hits"
+            echo "::error::/v1/remember is a legacy endpoint that 404s. Use a documented endpoint."
+            exit 1
+          fi
+          echo "ok: no /v1/remember"
+
+      - name: No retracted claims
+        run: |
+          hits=$(git grep -niE '93\.8%|742 ?ms|53 integrations' -- . ':!.github' \
+                 | grep -viE "never|\bnot\b|\bno\b|don'?t|avoid|instead of" || true)
+          if [ -n "$hits" ]; then
+            echo "$hits"
+            echo "::error::A retracted claim was reintroduced. See CONTRIBUTING.md#honesty-rules."
+            exit 1
+          fi
+          echo "ok: no retracted claims"
+
+      - name: Python helpers compile
+        run: |
+          python3 -m compileall -q 03-harness-attach/Grokbot/scripts
+          echo "ok: python helpers compile"

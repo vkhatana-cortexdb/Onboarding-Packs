@@ -1,0 +1,62 @@
+name: Docs bug — a documented step doesn't work
+description: A command, endpoint, path, or claim in these packs is wrong or fails.
+title: "[docs bug] "
+labels: ["bug", "docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Never paste API keys, bearer tokens, or `.env` contents here** —
+        redact them from any output you attach.
+  - type: dropdown
+    id: pack
+    attributes:
+      label: Which pack?
+      options:
+        - 00-cloud-trial
+        - 01-self-host
+        - 02-app-in-repo
+        - 03-harness-attach
+        - README.md / AGENTS.md (routing)
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: File and line
+      description: e.g. `01-self-host/CORTEXDB_SETUP_GUIDE.md:204`
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What the docs say should happen
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+      description: Paste the exact command and its output, with secrets redacted.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, architecture, Docker version, CortexDB image tag or API base URL, harness (Claude Code / Cursor / Grok Bot) if relevant.
+      placeholder: |
+        OS: macOS 15.5 (arm64)
+        Docker: 27.1.1
+        CortexDB: cortexdb/cortexdb:v0.9.8
+    validations:
+      required: true
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Before you submit
+      options:
+        - label: I have removed all API keys, tokens, and credentials from this report.
+          required: true

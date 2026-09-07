@@ -1,0 +1,39 @@
+name: Docs improvement — something was missing or confusing
+description: A step you got stuck on, a missing prerequisite, or a suggested addition.
+title: "[docs] "
+labels: ["enhancement", "docs"]
+body:
+  - type: dropdown
+    id: pack
+    attributes:
+      label: Which pack?
+      options:
+        - 00-cloud-trial
+        - 01-self-host
+        - 02-app-in-repo
+        - 03-harness-attach
+        - README.md / AGENTS.md (routing)
+        - New pack / not covered yet
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Where did you get stuck?
+      description: What were you trying to do, and what did the docs leave you guessing about?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would have helped?
+      description: A suggested wording, an extra step, a caveat worth calling out.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This would restructure the packs or add a new onboarding path (maintainers will want to discuss before a PR).
+          required: false

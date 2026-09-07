@@ -1,5 +1,9 @@
 # CortexDB Onboarding Packs
 
+[![Docs hygiene](https://github.com/vkhatana-cortexdb/Onboarding-Packs/actions/workflows/hygiene.yml/badge.svg)](https://github.com/vkhatana-cortexdb/Onboarding-Packs/actions/workflows/hygiene.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 Official onboarding docs for CortexDB. **One repo, clear paths.** Send this whole repo (or a folder deep-link). Do not fork into three repos — that goes stale.
 
 ---
@@ -65,6 +69,8 @@ Unified Brain product (separate): https://github.com/vipul-khatana/Unified-Brain
 Onboarding-Packs/
   README.md
   AGENTS.md
+  CONTRIBUTING.md     ← how to file issues / send PRs
+  SECURITY.md         ← private vulnerability reporting
   00-cloud-trial/     ← hosted free trial / cloud keys (default human start)
   01-self-host/       ← Docker local trial
   02-app-in-repo/     ← new app or existing repo (uses keys from 00 or 01)
@@ -82,8 +88,27 @@ Onboarding-Packs/
 - CortexDB is **not** “always-on” without setup.
 - Free-tier anonymous tokens expire (~7 days); re-signup is a new empty tenant.
 
+## Contributing
+
+**Issues and PRs are very welcome.** If a command in here failed on your machine, that's a
+bug worth filing — you don't need permission or an affiliation to open one.
+
+- Report a broken step or wrong claim → [open an issue](https://github.com/vkhatana-cortexdb/Onboarding-Packs/issues/new/choose)
+- Send a fix → fork, branch, PR against `main`. See [CONTRIBUTING.md](CONTRIBUTING.md).
+- `main` is protected: every change lands through a reviewed PR, maintainers included.
+- Participation is governed by our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+Corrections backed by real terminal output get merged fastest. Please open an issue before a
+large restructure so we can agree on the shape first.
+
 ## Security
 
 - Never commit filled `.env` / `cortex.env`.
 - Example env files stay placeholders only.
 - Agents must not print API keys or paste them into chat.
+- Found a vulnerability or a committed secret? **Do not open a public issue** —
+  follow [SECURITY.md](SECURITY.md).
+
+## License
+
+[Apache License 2.0](LICENSE).

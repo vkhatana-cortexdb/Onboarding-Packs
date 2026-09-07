@@ -2,9 +2,7 @@
 
 This file is large (~522 KB) in the source tree. Open the canonical copy instead of duplicating it here:
 
-`/Users/vipulkhatana/Desktop/Workspace/CortexDB/Documentation/cortexdb_agent_onboarding_docs/Agent/04_FULL_REFERENCE.md`
-
-Or from the CortexDB Documentation checkout:
+From a CortexDB Documentation checkout:
 
 `Documentation/cortexdb_agent_onboarding_docs/Agent/04_FULL_REFERENCE.md`
 

@@ -1,0 +1,11 @@
+# Every PR requires review from a maintainer.
+# Keep this in sync with the "Require review from Code Owners" branch rule.
+*                       @vkhatana-cortexdb
+
+# Contribution surface and security policy — maintainer-only by design.
+/.github/               @vkhatana-cortexdb
+/LICENSE                @vkhatana-cortexdb
+/SECURITY.md            @vkhatana-cortexdb
+/CODE_OF_CONDUCT.md     @vkhatana-cortexdb
+/CONTRIBUTING.md        @vkhatana-cortexdb
+/AGENTS.md              @vkhatana-cortexdb
