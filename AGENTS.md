@@ -43,7 +43,11 @@ Trigger: *free trial*, *cloud keys*, *hosted*, *api-v1*, *get me a brain*, *try 
 
 ## Path 5 — Harness attach
 
-`$PACK_ROOT/03-harness-attach/` — Claude Code uses **`~/.claude.json` → `mcpServers`**, not `~/.claude/mcp.json`.
+`$PACK_ROOT/03-harness-attach/` — pick the pack for the tool:
+
+- **Claude Code:** `ClaudeCode/` — config **`~/.claude.json` → `mcpServers`** (not `~/.claude/mcp.json`). Label `harness:claude-code`.
+- **Claude Desktop:** `ClaudeDesktop/` — config **`~/Library/Application Support/Claude/claude_desktop_config.json`**. Prefer direct `/opt/homebrew/bin/cortexdb-mcp`. Label `harness:claude-desktop`. After edit: Cmd+Q, reopen, new chat, enable connector.
+- **Cursor / Grok Bot:** `Cursor/`, `Grokbot/`.
 
 ---
 
