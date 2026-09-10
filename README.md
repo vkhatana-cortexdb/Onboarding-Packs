@@ -16,7 +16,7 @@ Official onboarding docs for CortexDB. **One repo, clear paths.** Send this whol
 | **2** | **Human** who wants **Docker self-host** | Local container trial | [`01-self-host/`](01-self-host/) → `CORTEXDB_SETUP_GUIDE.md` |
 | **3** | **Agentic developer** building a **new** app | *“Build my app with CortexDB”* (prefer shared cloud `.env` from path 1) | [`02-app-in-repo/APP-ONBOARDING.md`](02-app-in-repo/APP-ONBOARDING.md) |
 | **4** | **Agentic development** on an **existing** repo | *“Implement CortexDB on my current repo”* | Same `APP-ONBOARDING.md` + `PROJECT_DIR` |
-| **5** | Hook tools to a **personal / shared brain** | Attach Claude Code, Cursor, or Grok Bot | [`03-harness-attach/`](03-harness-attach/) |
+| **5** | Hook tools to a **personal / shared brain** | Attach Claude Code, Claude Desktop, Cursor, or Grok Bot | [`03-harness-attach/`](03-harness-attach/) |
 
 Agents: also read [`AGENTS.md`](AGENTS.md).
 
@@ -57,7 +57,7 @@ Open [`01-self-host/`](01-self-host/) → `CORTEXDB_SETUP_GUIDE.md`.
 
 ## 5. Personal / shared brain — harnesses
 
-[`03-harness-attach/`](03-harness-attach/) — Claude Code (`~/.claude.json`), Cursor, Grok Bot.
+[`03-harness-attach/`](03-harness-attach/) — Claude Code (`~/.claude.json`), Claude Desktop (`claude_desktop_config.json`), Cursor, Grok Bot.
 
 Unified Brain product (separate): https://github.com/vipul-khatana/Unified-Brain-MVP
 

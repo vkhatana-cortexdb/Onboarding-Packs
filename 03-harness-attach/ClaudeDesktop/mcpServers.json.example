@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "cortexdb": {
+      "type": "stdio",
+      "command": "/opt/homebrew/bin/cortexdb-mcp",
+      "args": [],
+      "env": {
+        "CORTEXDB_URL": "https://api-v1.cortexdb.ai",
+        "CORTEXDB_API_KEY": "<from .env - do not commit>",
+        "CORTEXDB_ACTOR": "<from .env>",
+        "CORTEXDB_SCOPE": "<from .env>",
+        "CORTEXDB_HARNESS": "claude-desktop",
+        "CORTEXDB_TIMEOUT": "45",
+        "CORTEXDB_WAIT": "indexed",
+        "CORTEXDB_MCP_BIN": "/opt/homebrew/bin/cortexdb-mcp",
+        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+      }
+    }
+  }
+}

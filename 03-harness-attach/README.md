@@ -1,6 +1,6 @@
 # 03 — Attach chat / IDE / Grok to an existing brain
 
-Point Claude Code, Cursor, or Grok Bot at a **working** CortexDB identity (shared Personal-Brain preferred). No new product UI — harness packs only.
+Point Claude Code, Claude Desktop, Cursor, or Grok Bot at a **working** CortexDB identity (shared Personal-Brain preferred). No new product UI — harness packs only.
 
 ## Packs
 
@@ -8,11 +8,17 @@ Point Claude Code, Cursor, or Grok Bot at a **working** CortexDB identity (share
 |---|---|---|
 | **`Grokbot/`** | Grok Bot (HTTP helper) | `GROKBOT-ONBOARDING.md` |
 | **`ClaudeCode/`** | Claude Code MCP | `CLAUDE-CODE-ONBOARDING.md` |
+| **`ClaudeDesktop/`** | Claude Desktop MCP | `CLAUDE-DESKTOP-ONBOARDING.md` |
 | **`Cursor/`** | Cursor MCP + rules | `CURSOR-ONBOARDING.md` |
 
-## Claude Code note
+## Claude Code vs Claude Desktop
 
-User-global MCP is **`~/.claude.json`** → `mcpServers` (not `~/.claude/mcp.json`). Prefer `type=stdio` with `/opt/homebrew/bin/python3` and `args` for `cortexdb-mcp` / `-m cortexdb_mcp` or a traced wrapper.
+| | Claude Code | Claude Desktop |
+|---|---|---|
+| Config | **`~/.claude.json`** → `mcpServers` (not `~/.claude/mcp.json`) | **`~/Library/Application Support/Claude/claude_desktop_config.json`** |
+| Recommended command | `/opt/homebrew/bin/python3` + `-m cortexdb_mcp` (or script / traced wrapper OK) | **Direct** `/opt/homebrew/bin/cortexdb-mcp`, `args: []` — traced wrappers have wedged Desktop |
+| Label | `harness:claude-code` | `harness:claude-desktop` |
+| Reload | Restart Claude Code | **Cmd+Q**, reopen, **new chat**, enable cortexdb connector |
 
 ## Audience
 
